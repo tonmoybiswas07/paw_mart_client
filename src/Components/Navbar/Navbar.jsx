@@ -4,8 +4,8 @@ import { Link } from "react-router";
 const Navbar = () => {
   const links = (
     <>
-      <Link>Home</Link>
-      <Link>Pets &amp; Supplies</Link>
+      <Link to={"/"}>Home</Link>
+      <Link to={"/petSupplies"}>Pets &amp; Supplies</Link>
       <Link>Add Listing</Link>
       <Link>My Listings</Link>
       <Link>My Orders</Link>
@@ -40,7 +40,9 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link className=" text-xl font-bold text-amber-600">PawMart</Link>
+          <Link to={"/"} className=" text-xl font-bold text-amber-600">
+            PawMart
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5">{links}</ul>
