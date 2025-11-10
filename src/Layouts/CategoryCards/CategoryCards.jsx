@@ -16,7 +16,7 @@ const CategoryCards = () => {
   return (
     <div>
       <div className="mt-10">
-        <h2 className="text-center font-bold text-2xl md:text-3xl">
+        <h2 className="text-center font-extrabold text-amber-700 text-2xl md:text-3xl">
           All Category
         </h2>
       </div>

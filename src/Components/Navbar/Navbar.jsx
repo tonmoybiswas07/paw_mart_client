@@ -1,19 +1,19 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   const links = (
     <>
-      <Link to={"/"}>Home</Link>
-      <Link to={"/petSupplies"}>Pets &amp; Supplies</Link>
-      <Link>Add Listing</Link>
-      <Link>My Listings</Link>
-      <Link>My Orders</Link>
+      <NavLink to={"/"}>Home</NavLink>
+      <NavLink to={"/petSupplies"}>Pets &amp; Supplies</NavLink>
+      <NavLink>Add Listing</NavLink>
+      <NavLink>My Listings</NavLink>
+      <NavLink>My Orders</NavLink>
     </>
   );
   return (
     <div>
-      <div className="navbar bg-base-100 fixed top-0 left-0 right-0 shadow z-100">
+      <div className="navbar bg-gradient-to-r from-amber-100 to-orange-50 fixed top-0 left-0 right-0 shadow z-100">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
