@@ -41,7 +41,7 @@ export default function Carousel() {
       pagination={{ clickable: true }}
       autoplay={{ delay: 4000, disableOnInteraction: false }}
       onSlideChange={(swiper) => setActive(swiper.activeIndex)}
-      className="w-full h-120"
+      className="w-full h-70 md:h-120"
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index} className="relative">
@@ -57,7 +57,7 @@ export default function Carousel() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className={`absolute bottom-50 left-1/2 -translate-x-1/2 text-5xl font-bold text-center drop-shadow-lg ${slide.color}`}
+              className={`absolute bottom-20 md:bottom-50 left-1/2 -translate-x-1/2 text-2xl md:text-5xl font-bold text-center drop-shadow-lg ${slide.color}`}
             >
               {slide.text}
             </motion.h2>
