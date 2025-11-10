@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const links = (
@@ -13,7 +13,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-gradient-to-r from-amber-100 to-orange-50 fixed top-0 left-0 right-0 shadow z-100">
+      <div className="navbar bg-gradient-to-r from-amber-100 to-orange-50 fixed top-0 left-0 right-0 shadow z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -48,8 +48,12 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-5">{links}</ul>
         </div>
         <div className="navbar-end gap-3">
-          <Link className="btn bg-amber-500 text-white">Login</Link>
-          <Link className="btn bg-amber-500 text-white">Register</Link>
+          <Link to="/login" className="btn bg-amber-500 text-white">
+            Login
+          </Link>
+          <Link to="/register" className="btn bg-amber-500 text-white">
+            Register
+          </Link>
         </div>
       </div>
     </div>
