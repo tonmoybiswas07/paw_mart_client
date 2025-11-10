@@ -4,6 +4,8 @@ import Home from "../Pages/Home/Home";
 import PetSupplies from "../Pages/PetSupplies/PetSupplies";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import AddListing from "../Pages/AddListing/AddListing";
+import Error from "../Components/Error/Error";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
         element: <PetSupplies></PetSupplies>,
       },
       {
+        path: "/addListing",
+        element: <AddListing></AddListing>,
+      },
+      {
         path: "/login",
         element: <Login></Login>,
       },
@@ -28,6 +34,7 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+    errorElement: <Error></Error>,
   },
 ]);
 export default router;
