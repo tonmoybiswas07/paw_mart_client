@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { AuthContext } from "../AuthContext/AuthContext";
+import { CircularProgress } from "react-loader-spinner";
 
 const Navbar = () => {
   const { user, signoutUserFunc, setUser, loading, setLoading } =
@@ -28,15 +29,19 @@ const Navbar = () => {
     <>
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/petSupplies"}>Pets &amp; Supplies</NavLink>
-      <NavLink to={"/addListing"}>Add Listing</NavLink>
-      <NavLink to={"/mylisting"}>My Listings</NavLink>
-      <NavLink to={"/myorder"}>My Orders</NavLink>
+      {user ? (
+        <>
+          <NavLink to={"/addListing"}>Add Listing</NavLink>
+          <NavLink to={"/mylisting"}>My Listings</NavLink>
+          <NavLink to={"/myorder"}>My Orders</NavLink>
+        </>
+      ) : null}
     </>
   );
   return (
     <div>
       <div className="navbar py-2 bg-gradient-to-r from-amber-100 to-orange-50 fixed top-0 left-0 right-0 shadow z-50">
-        <div className="navbar-start">
+        <div className="  w-120 navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -66,34 +71,39 @@ const Navbar = () => {
             PawMart
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex justify-center items-center">
           <ul className="menu menu-horizontal px-1 gap-5">{links}</ul>
         </div>
 
         {loading ? (
-          <p>loading.....</p>
+          <div className="ml-120">
+            <CircularProgress
+              height="60"
+              width="60"
+              color="#4fa94d"
+              ariaLabel="circular-progress-loading"
+              wrapperStyle={{}}
+              wrapperClass="wrapper-class"
+              visible={true}
+              strokeWidth={2}
+              animationDuration={1}
+            />
+          </div>
         ) : user ? (
-          <div className="text-center space-y-3">
-            <button
-              className=""
-              popoverTarget="popover-1"
-              style={{ anchorName: "--anchor-1" }}
-            >
+          <div className="dropdown dropdown-end ml-30">
+            <div tabIndex={0} role="button" className="ml-30 m-1">
               <img
                 src={user?.photoURL || "https://via.placeholder.com/88"}
                 className="h-10  w-10 rounded-full mx-auto border-2 border-amber-800"
                 alt=""
               />
-            </button>
-
+            </div>
             <div
-              className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
-              popover="auto"
-              id="popover-1"
-              style={{ positionAnchor: "--anchor-1" }}
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-60 p-2 shadow-sm"
             >
               <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-              <p className="pl-7">{user?.email}</p>
+              <p className="">{user?.email}</p>
               <button
                 onClick={handleSignout}
                 className="bg-amber-800 px-8 font-bold text-white rounded-full mt-2 py-3"

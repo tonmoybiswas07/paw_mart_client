@@ -40,6 +40,7 @@ const Register = () => {
       .then((res) => {
         setUser(res.user);
         toast.success("Signup successful!");
+
         navigate("/login");
       })
       .catch((e) => {

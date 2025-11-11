@@ -9,6 +9,7 @@ import Error from "../Components/Error/Error";
 import MyListing from "../Pages/MyListing/MyListing";
 import MyOrders from "../Pages/MyOrders/MyOrders";
 import CardDetails from "../Pages/CardDetails/CardDetails";
+import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addListing",
-        element: <AddListing></AddListing>,
+        element: (
+          <PrivateRoute>
+            <AddListing></AddListing>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -40,15 +45,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/mylisting",
-        element: <MyListing></MyListing>,
+        element: (
+          <PrivateRoute>
+            <MyListing></MyListing>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myorder",
-        element: <MyOrders></MyOrders>,
+        element: (
+          <PrivateRoute>
+            <MyOrders></MyOrders>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/cardDetails/:id",
-        element: <CardDetails></CardDetails>,
+        element: (
+          <PrivateRoute>
+            <CardDetails></CardDetails>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/martProducts/${params.id}`),
       },

@@ -3,6 +3,7 @@ import PetSuppliesCard from "../../Pages/petSuppliesCard/PetSuppliesCard";
 
 const LatestProducts = ({ latestProducts }) => {
   console.log(latestProducts);
+
   return (
     <div>
       <div>
