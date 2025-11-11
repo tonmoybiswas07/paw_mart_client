@@ -12,7 +12,7 @@ const Error = () => {
         <h1 className="text-2xl md:text-5xl  font-bold text-white">
           Oops! Page Not Found
         </h1>
-        <h2 className="text-center text-white font-bold text-2xl mt-4">
+        <h2 className="text-center text-white font-bold text-lg md:text-2xl mt-4">
           The page you are looking for was moved, removed, <br /> renamed or
           might never existed.
         </h2>

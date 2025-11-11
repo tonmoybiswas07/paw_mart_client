@@ -16,10 +16,12 @@ const router = createBrowserRouter([
         index: true,
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("http://localhost:5000/martProducts"),
       },
       {
         path: "/petSupplies",
         element: <PetSupplies></PetSupplies>,
+        loader: () => fetch("http://localhost:5000/martProducts"),
       },
       {
         path: "/addListing",
