@@ -6,6 +6,10 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import AddListing from "../Pages/AddListing/AddListing";
 import Error from "../Components/Error/Error";
+import MyListing from "../Pages/MyListing/MyListing";
+import MyOrders from "../Pages/MyOrders/MyOrders";
+import CardDetails from "../Pages/CardDetails/CardDetails";
+import { param } from "framer-motion/client";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +38,20 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/mylisting",
+        element: <MyListing></MyListing>,
+      },
+      {
+        path: "/myorder",
+        element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "/cardDetails/:id",
+        element: <CardDetails></CardDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/martProducts/${params.id}`),
       },
     ],
     errorElement: <Error></Error>,

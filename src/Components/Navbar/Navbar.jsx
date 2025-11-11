@@ -8,8 +8,8 @@ const Navbar = () => {
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/petSupplies"}>Pets &amp; Supplies</NavLink>
       <NavLink to={"/addListing"}>Add Listing</NavLink>
-      <NavLink>My Listings</NavLink>
-      <NavLink>My Orders</NavLink>
+      <NavLink to={"/mylisting"}>My Listings</NavLink>
+      <NavLink to={"/myorder"}>My Orders</NavLink>
     </>
   );
   return (
@@ -81,7 +81,7 @@ const StyledWrapper = styled.div`
     background-color: inherit;
     border-radius: 100px;
     font-weight: 600;
-    
+
     box-shadow: 0 0 0 2px #ffffff20;
     cursor: pointer;
     overflow: hidden;

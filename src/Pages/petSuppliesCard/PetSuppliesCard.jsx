@@ -5,7 +5,6 @@ const PetSuppliesCard = ({ card }) => {
   const { _id, name, image, location, category, price } = card;
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-200">
- 
       <div className="w-full h-48 md:h-56 lg:h-44 overflow-hidden">
         <img
           src={image}
@@ -14,7 +13,6 @@ const PetSuppliesCard = ({ card }) => {
         />
       </div>
 
-  
       <div className="p-4 flex flex-col gap-3">
         <div className="flex items-start justify-between">
           <div>
@@ -39,7 +37,7 @@ const PetSuppliesCard = ({ card }) => {
           </div>
 
           <Link
-            to={`/petDetails/${_id}`}
+            to={`/cardDetails/${_id}`}
             className="inline-block bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors"
           >
             See Details
