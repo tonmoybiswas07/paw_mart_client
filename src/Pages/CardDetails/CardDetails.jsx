@@ -10,7 +10,6 @@ const CardDetails = () => {
   return (
     <div className="min-h-screen bg-amber-50 flex items-center justify-center p-6">
       <div className="bg-white shadow-2xl rounded-2xl max-w-3xl w-full flex flex-col md:flex-row overflow-hidden">
-        {/* Image Section */}
         <div className="md:w-1/2">
           <img src={image} alt={name} className="w-full h-full object-cover" />
         </div>
@@ -58,14 +57,11 @@ const CardDetails = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative">
-            {/* Modal Header */}
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               Place Your Order
             </h2>
 
-            {/* Form */}
             <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Buyer Name */}
               <input
                 type="text"
                 value="John Doe"
@@ -74,7 +70,6 @@ const CardDetails = () => {
                 placeholder="Buyer Name"
               />
 
-              {/* Email */}
               <input
                 type="email"
                 value="john@example.com"
@@ -83,16 +78,14 @@ const CardDetails = () => {
                 placeholder="Email"
               />
 
-              {/* Product ID */}
               <input
                 type="text"
-                value=""
+                value={data?._id || ""}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
                 placeholder="Product ID"
               />
 
-              {/* Product Name */}
               <input
                 type="text"
                 value={name}
@@ -101,7 +94,6 @@ const CardDetails = () => {
                 placeholder="Product Name"
               />
 
-              {/* Quantity */}
               <input
                 type="number"
                 value={1}
@@ -110,7 +102,6 @@ const CardDetails = () => {
                 placeholder="Quantity"
               />
 
-              {/* Price */}
               <input
                 type="number"
                 value={price}
@@ -119,27 +110,23 @@ const CardDetails = () => {
                 placeholder="Price"
               />
 
-              {/* Address */}
               <input
                 type="text"
                 placeholder={location}
                 className="w-full p-2 border border-gray-300 rounded-lg md:col-span-2"
               />
 
-              {/* Date */}
               <input
                 type="date"
                 className="w-full p-2 border border-gray-300 rounded-lg"
               />
 
-              {/* Phone */}
               <input
                 type="tel"
                 placeholder="Phone"
                 className="w-full p-2 border border-gray-300 rounded-lg"
               />
 
-              {/* Additional Notes */}
               <textarea
                 rows={3}
                 placeholder="Additional Notes"
@@ -147,7 +134,6 @@ const CardDetails = () => {
               />
             </form>
 
-            {/* Buttons */}
             <div className="flex justify-end gap-2 mt-6">
               <button
                 type="button"
@@ -157,6 +143,7 @@ const CardDetails = () => {
                 Cancel
               </button>
               <button
+                onClick={() => setShowModal(false)}
                 type="submit"
                 className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
               >

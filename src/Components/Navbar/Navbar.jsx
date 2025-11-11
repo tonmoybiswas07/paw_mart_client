@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 const Navbar = () => {
+  const { user, signoutUserFunc, setUser, loading, setLoading } =
+    useContext(AuthContext);
+  console.log(user);
+
+  const handleSignout = () => {
+    setLoading(true);
+    signoutUserFunc()
+      .then(() => {
+        toast.success("Signout successful");
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const links = (
     <>
       <NavLink to={"/"}>Home</NavLink>
@@ -48,24 +69,59 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5">{links}</ul>
         </div>
-        <div className="navbar-end gap-3">
-          <Link to="/login">
-            <StyledWrapper>
-              <button className="animated-button ">
-                <span>Login</span>
-                <span />
+
+        {loading ? (
+          <p>loading.....</p>
+        ) : user ? (
+          <div className="text-center space-y-3">
+            <button
+              className=""
+              popoverTarget="popover-1"
+              style={{ anchorName: "--anchor-1" }}
+            >
+              <img
+                src={user?.photoURL || "https://via.placeholder.com/88"}
+                className="h-10  w-10 rounded-full mx-auto border-2 border-amber-800"
+                alt=""
+              />
+            </button>
+
+            <div
+              className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+              popover="auto"
+              id="popover-1"
+              style={{ positionAnchor: "--anchor-1" }}
+            >
+              <h2 className="text-xl font-semibold">{user?.displayName}</h2>
+              <p className="pl-7">{user?.email}</p>
+              <button
+                onClick={handleSignout}
+                className="bg-amber-800 px-8 font-bold text-white rounded-full mt-2 py-3"
+              >
+                Sign Out
               </button>
-            </StyledWrapper>
-          </Link>
-          <Link to="/register">
-            <StyledWrapper>
-              <button className="animated-button">
-                <span>Register</span>
-                <span />
-              </button>
-            </StyledWrapper>
-          </Link>
-        </div>
+            </div>
+          </div>
+        ) : (
+          <div className="navbar-end gap-3">
+            <Link to="/login">
+              <StyledWrapper>
+                <button className="animated-button ">
+                  <span>Login</span>
+                  <span />
+                </button>
+              </StyledWrapper>
+            </Link>
+            <Link to="/register">
+              <StyledWrapper>
+                <button className="animated-button">
+                  <span>Register</span>
+                  <span />
+                </button>
+              </StyledWrapper>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,56 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Lock, LogIn, Mail, PawPrint, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthContext";
+import { useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    signInWithEmailAndPasswordFunc,
+    signInWithGoogleFunc,
+
+    setUser,
+    user,
+  } = useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(from);
+    }
+  }, [user, navigate, from]);
+
+  const handleSignin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signInWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Login successful");
+        navigate(from);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+
+  const handleGoogleSignin = () => {
+    signInWithGoogleFunc()
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Login successful with Google");
+        navigate(from);
+      })
+      .catch((e) => toast.error(e.message));
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
@@ -13,7 +60,7 @@ const Login = () => {
           <h1 className="text-2xl font-bold text-gray-800">PawMart Login</h1>
         </div>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSignin} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Email
@@ -22,6 +69,7 @@ const Login = () => {
               <Mail className="w-4 h-4 text-gray-400" />
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
                 className="w-full p-2 outline-none text-gray-700"
                 required
@@ -37,6 +85,7 @@ const Login = () => {
               <Lock className="w-4 h-4 text-gray-400" />
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 placeholder="Enter your password"
                 className="w-full p-2 outline-none text-gray-700"
                 required
@@ -63,6 +112,7 @@ const Login = () => {
           </button>
 
           <button
+            onClick={handleGoogleSignin}
             type="button"
             className="w-full border border-gray-300 text-gray-700 font-semibold py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"
           >

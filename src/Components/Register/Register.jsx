@@ -1,9 +1,66 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { User, Mail, Lock, Image, Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const {
+    createUserWithEmailAndPasswordFunc,
+    updateProfileFunc,
+    setUser,
+    setLoading,
+    signInWithGoogleFunc,
+  } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const photoURL = e.target.photoURL.value;
+
+    const reg =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
+
+    if (!reg.test(password)) {
+      toast.error(
+        "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
+      );
+      return;
+    }
+
+    createUserWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        return updateProfileFunc(name, photoURL).then(() => res);
+      })
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Signup successful!");
+        navigate("/login");
+      })
+      .catch((e) => {
+        console.error(e);
+        toast.error(e.message);
+      });
+  };
+
+  const handleGoogleSignin = () => {
+    signInWithGoogleFunc()
+      .then((res) => {
+        setLoading(false);
+        setUser(res.user);
+        navigate("/");
+        toast.success("Signin successful");
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error(e.message);
+      });
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen mt-16">
@@ -13,7 +70,7 @@ const Register = () => {
           <h1 className="text-2xl font-bold text-gray-800">Create Account</h1>
         </div>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Full Name
@@ -22,6 +79,7 @@ const Register = () => {
               <User className="w-4 h-4 text-gray-400" />
               <input
                 type="text"
+                name="name"
                 placeholder="Enter your name"
                 className="w-full p-2 outline-none text-gray-700"
                 required
@@ -37,6 +95,7 @@ const Register = () => {
               <Mail className="w-4 h-4 text-gray-400" />
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
                 className="w-full p-2 outline-none text-gray-700"
                 required
@@ -52,6 +111,7 @@ const Register = () => {
               <Lock className="w-4 h-4 text-gray-400" />
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 placeholder="Enter your password"
                 className="w-full p-2 outline-none text-gray-700"
                 required
@@ -78,6 +138,7 @@ const Register = () => {
               <Image className="w-4 h-4 text-gray-400" />
               <input
                 type="url"
+                name="photoURL"
                 placeholder="Enter your photo URL"
                 className="w-full p-2 outline-none text-gray-700"
               />
@@ -92,6 +153,7 @@ const Register = () => {
           </button>
 
           <button
+            onClick={handleGoogleSignin}
             type="button"
             className="w-full border border-gray-300 text-gray-700 font-semibold py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"
           >

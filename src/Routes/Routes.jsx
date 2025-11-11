@@ -9,7 +9,6 @@ import Error from "../Components/Error/Error";
 import MyListing from "../Pages/MyListing/MyListing";
 import MyOrders from "../Pages/MyOrders/MyOrders";
 import CardDetails from "../Pages/CardDetails/CardDetails";
-import { param } from "framer-motion/client";
 
 const router = createBrowserRouter([
   {
