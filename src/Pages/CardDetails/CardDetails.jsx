@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { MapPin, Mail, Tag, DollarSign, PawPrint } from "lucide-react";
-
 import { AuthContext } from "../../Components/AuthContext/AuthContext";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const CardDetails = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,6 +20,50 @@ const CardDetails = () => {
     location,
     image,
   } = card;
+
+
+  const handleOrderSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const order = {
+      productId: _id,
+      productName: name,
+      buyerName: user.displayName,
+      buyerEmail: user.email,
+      price,
+      quantity: 1,
+      address: form.address.value,
+      date: form.date.value,
+      phone: form.phone.value,
+      notes: form.notes.value,
+      orderDate: new Date(),
+      status: "Pending",
+    };
+
+    fetch("http://localhost:5000/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire(
+            "Success!",
+            "Your adoption request / order has been placed!",
+            "success"
+          );
+          setShowModal(false);
+        } else {
+          Swal.fire("Error!", "Failed to place order.", "error");
+        }
+      })
+      .catch(() => {
+        Swal.fire("Error!", "Failed to place order.", "error");
+      });
+  };
+
   return (
     <div className="min-h-screen bg-amber-50 flex items-center justify-center p-6">
       <div className="bg-white shadow-2xl rounded-2xl max-w-3xl w-full flex flex-col md:flex-row overflow-hidden">
@@ -49,8 +93,7 @@ const CardDetails = () => {
             </p>
 
             <p className="flex items-center text-gray-600 mb-4">
-              <DollarSign className="w-4 h-4 mr-2 text-amber-500" />
-              {price}
+              <DollarSign className="w-4 h-4 mr-2 text-amber-500" /> {price}
             </p>
 
             <p className="text-gray-700 leading-relaxed">{description}</p>
@@ -65,8 +108,7 @@ const CardDetails = () => {
         </div>
       </div>
 
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-
+      {/* ✅ Order Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative">
@@ -74,95 +116,77 @@ const CardDetails = () => {
               Place Your Order
             </h2>
 
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form
+              onSubmit={handleOrderSubmit}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
               <input
                 type="text"
                 value={user.displayName}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
-                placeholder="Buyer Name"
               />
-
               <input
                 type="email"
                 value={user.email}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
-                placeholder="Email"
               />
-
-              <input
-                type="text"
-                value={_id || ""}
-                readOnly
-                className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
-                placeholder="Product ID"
-              />
-
               <input
                 type="text"
                 value={name}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
-                placeholder="Product Name"
               />
-
-              <input
-                type="number"
-                value={1}
-                readOnly
-                className="w-full p-2 border border-gray-300 rounded-lg"
-                placeholder="Quantity"
-              />
-
               <input
                 type="number"
                 value={price}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
-                placeholder="Price"
               />
-
               <input
                 type="text"
-                placeholder={location}
+                name="address"
+                placeholder="Full Address"
                 className="w-full p-2 border border-gray-300 rounded-lg md:col-span-2"
+                required
               />
-
               <input
                 type="date"
+                name="date"
                 className="w-full p-2 border border-gray-300 rounded-lg"
+                required
               />
-
               <input
                 type="tel"
+                name="phone"
                 placeholder="Phone"
                 className="w-full p-2 border border-gray-300 rounded-lg"
+                required
               />
-
               <textarea
+                name="notes"
                 rows={3}
                 placeholder="Additional Notes"
                 className="w-full p-2 border border-gray-300 rounded-lg md:col-span-2"
               />
-            </form>
 
-            <div className="flex justify-end gap-2 mt-6">
-              <button
-                type="button"
-                onClick={() => setShowModal(false)}
-                className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => setShowModal(false)}
-                type="submit"
-                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
-              >
-                Place Order
-              </button>
-            </div>
+              <div className="flex justify-end gap-2 md:col-span-2">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+                >
+                  Place Order
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
