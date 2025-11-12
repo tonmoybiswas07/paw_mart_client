@@ -4,16 +4,29 @@ import PetSuppliesCard from "../petSuppliesCard/PetSuppliesCard";
 import { Hourglass } from "react-loader-spinner";
 
 const PetSupplies = () => {
-  const loaderData = useLoaderData(); // loaderData হতে পারে empty বা undefined প্রথমে
-  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const loader = useLoaderData();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (loaderData) {
-      setData(loaderData);
+    if (loader) {
+      setData(loader);
+      setFilteredData(loader);
       setLoading(false);
     }
-  }, [loaderData]);
+  }, [loader]);
+
+  const handleSearch = (e) => {
+    const text = e.target.value.toLowerCase();
+    setSearch(text);
+
+    const filtered = data.filter((item) =>
+      item.name.toLowerCase().includes(text)
+    );
+    setFilteredData(filtered);
+  };
 
   return (
     <div>
@@ -21,6 +34,16 @@ const PetSupplies = () => {
         <h1 className="font-bold text-3xl text-center text-amber-700">
           Pets & Supplies — Adopt, Care & Shop
         </h1>
+      </div>
+
+      <div className="flex justify-center mb-10">
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={search}
+          onChange={handleSearch}
+          className="border border-amber-500 rounded-xl px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-amber-400"
+        />
       </div>
 
       {loading ? (
@@ -35,9 +58,15 @@ const PetSupplies = () => {
         </div>
       ) : (
         <div className="card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-5">
-          {data.map((card) => (
-            <PetSuppliesCard key={card.id} card={card} />
-          ))}
+          {filteredData.length > 0 ? (
+            filteredData.map((card) => (
+              <PetSuppliesCard key={card.id} card={card} />
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-500 text-lg">
+              No results found for "{search}"
+            </p>
+          )}
         </div>
       )}
     </div>

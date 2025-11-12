@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Components/AuthContext/AuthContext";
 
-const AddListing = ({ currentUserEmail = "user@example.com" }) => {
+const AddListing = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="flex items-center justify-center min-h-screen  mt-15">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg">
@@ -92,7 +94,7 @@ const AddListing = ({ currentUserEmail = "user@example.com" }) => {
             </label>
             <input
               type="email"
-              value={currentUserEmail}
+              value={user.email}
               readOnly
               className="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 text-gray-600 outline-none"
             />
