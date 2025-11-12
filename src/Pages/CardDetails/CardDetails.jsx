@@ -1,14 +1,25 @@
 import React, { useContext, useState } from "react";
 import { MapPin, Mail, Tag, DollarSign, PawPrint } from "lucide-react";
-import { useLoaderData } from "react-router-dom";
+
 import { AuthContext } from "../../Components/AuthContext/AuthContext";
+import { useLoaderData } from "react-router";
 
 const CardDetails = () => {
+  const [showModal, setShowModal] = useState(false);
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const [showModal, setShowModal] = useState(false);
-  const { name, category, ownerEmail, description, price, location, image } =
-    data;
+  const card = data.result;
+
+  const {
+    _id,
+    name,
+    category,
+    ownerEmail,
+    description,
+    price,
+    location,
+    image,
+  } = card;
   return (
     <div className="min-h-screen bg-amber-50 flex items-center justify-center p-6">
       <div className="bg-white shadow-2xl rounded-2xl max-w-3xl w-full flex flex-col md:flex-row overflow-hidden">
@@ -82,7 +93,7 @@ const CardDetails = () => {
 
               <input
                 type="text"
-                value={data?._id || ""}
+                value={_id || ""}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
                 placeholder="Product ID"
