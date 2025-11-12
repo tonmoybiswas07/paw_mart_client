@@ -60,7 +60,7 @@ const PetSupplies = () => {
         <div className="card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-5">
           {filteredData.length > 0 ? (
             filteredData.map((card) => (
-              <PetSuppliesCard key={card.id} card={card} />
+              <PetSuppliesCard key={card._id} card={card} />
             ))
           ) : (
             <p className="col-span-full text-center text-gray-500 text-lg">

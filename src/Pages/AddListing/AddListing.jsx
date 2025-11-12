@@ -1,8 +1,38 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Components/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const AddListing = () => {
   const { user } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const fromData = {
+      name: e.target.name.value,
+      category: e.target.category.value,
+      ownerEmail: user.email,
+      description: e.target.description.value,
+      price: e.target.price.value,
+      location: e.target.location.value,
+      image: e.target.image.value,
+    };
+
+    fetch("http://localhost:5000/martProducts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(fromData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Listing added successfully!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="flex items-center justify-center min-h-screen  mt-15">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg">
@@ -10,13 +40,14 @@ const AddListing = () => {
           Add New Listing
         </h1>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Name
             </label>
             <input
               type="text"
+              name="name"
               placeholder="Enter name"
               className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
             />
@@ -26,7 +57,10 @@ const AddListing = () => {
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Category
             </label>
-            <select className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500">
+            <select
+              name="category"
+              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+            >
               <option>Pets</option>
               <option>Food</option>
               <option>Accessories</option>
@@ -40,6 +74,7 @@ const AddListing = () => {
             </label>
             <input
               type="number"
+              name="price"
               placeholder="Enter price"
               className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
             />
@@ -51,6 +86,7 @@ const AddListing = () => {
             </label>
             <input
               type="text"
+              name="location"
               placeholder="Enter location"
               className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
             />
@@ -61,6 +97,7 @@ const AddListing = () => {
               Description
             </label>
             <textarea
+              name="description"
               placeholder="Enter description"
               className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
               rows="4"
@@ -73,17 +110,8 @@ const AddListing = () => {
             </label>
             <input
               type="url"
+              name="image"
               placeholder="Enter image URL"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Pick Up Date
-            </label>
-            <input
-              type="date"
               className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
             />
           </div>
@@ -94,6 +122,7 @@ const AddListing = () => {
             </label>
             <input
               type="email"
+              name="email"
               value={user.email}
               readOnly
               className="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 text-gray-600 outline-none"

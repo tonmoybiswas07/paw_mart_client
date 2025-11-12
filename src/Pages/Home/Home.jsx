@@ -7,7 +7,8 @@ import LatestProducts from "../../Layouts/LatestProducts/LatestProducts";
 import { useLoaderData } from "react-router";
 
 const Home = () => {
-  const data = useLoaderData();
+  const loaderData = useLoaderData();
+  const data = loaderData.result || [];
   const latestProducts = data.slice(0, 6);
   return (
     <div className="mt-16">

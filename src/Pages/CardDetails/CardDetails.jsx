@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MapPin, Mail, Tag, DollarSign, PawPrint } from "lucide-react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Components/AuthContext/AuthContext";
 
 const CardDetails = () => {
+  const { user } = useContext(AuthContext);
   const data = useLoaderData();
   const [showModal, setShowModal] = useState(false);
   const { name, category, ownerEmail, description, price, location, image } =
@@ -64,7 +66,7 @@ const CardDetails = () => {
             <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
-                value="John Doe"
+                value={user.displayName}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
                 placeholder="Buyer Name"
@@ -72,7 +74,7 @@ const CardDetails = () => {
 
               <input
                 type="email"
-                value="john@example.com"
+                value={user.email}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded-lg bg-gray-100"
                 placeholder="Email"
