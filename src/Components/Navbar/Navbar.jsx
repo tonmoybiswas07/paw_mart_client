@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -6,6 +6,8 @@ import { AuthContext } from "../AuthContext/AuthContext";
 import { CircularProgress } from "react-loader-spinner";
 
 const Navbar = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
   const { user, signoutUserFunc, setUser, loading, setLoading } =
     useContext(AuthContext);
   console.log(user);
@@ -24,7 +26,15 @@ const Navbar = () => {
         setLoading(false);
       });
   };
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
   const links = (
     <>
       <NavLink to={"/"}>Home</NavLink>
@@ -38,9 +48,10 @@ const Navbar = () => {
       ) : null}
     </>
   );
+
   return (
     <div>
-      <div className="navbar py-2 bg-gradient-to-r from-amber-100 to-orange-50 fixed top-0 left-0 right-0 shadow z-50">
+      <div className="navbar py-2 bg-base-100 fixed top-0 left-0 right-0 shadow z-50">
         <div className="  w-120 navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -72,8 +83,11 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex justify-center items-center">
-          <ul className="menu menu-horizontal px-1 gap-5">{links}</ul>
+          <ul className="menu menu-horizontal px-1 gap-5 text-black">
+            {links}
+          </ul>
         </div>
+        <div></div>
 
         {loading ? (
           <div className="ml-120">
@@ -104,6 +118,13 @@ const Navbar = () => {
             >
               <h2 className="text-xl font-semibold">{user?.displayName}</h2>
               <p className="">{user?.email}</p>
+              <input
+                onChange={(e) => handleTheme(e.target.checked)}
+                type="checkbox"
+                defaultChecked={localStorage.getItem("theme") === "dark"}
+                className="toggle"
+              />
+
               <button
                 onClick={handleSignout}
                 className="bg-amber-800 px-8 font-bold text-white rounded-full mt-2 py-3"
@@ -114,6 +135,12 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="navbar-end gap-3">
+            <input
+              onChange={(e) => handleTheme(e.target.checked)}
+              type="checkbox"
+              defaultChecked={localStorage.getItem("theme") === "dark"}
+              className="toggle"
+            />
             <Link to="/login">
               <StyledWrapper>
                 <button className="animated-button ">

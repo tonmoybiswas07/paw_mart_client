@@ -3,7 +3,7 @@ import React from "react";
 const Adopt = () => {
   return (
     <div>
-      <section className="bg-gradient-to from-amber-100 to-orange-50 py-16 px-6 text-center">
+      <section className="py-16 px-6 text-center">
         <h2 className="text-4xl font-extrabold text-amber-700 mb-6">
           Why Adopt from PawMart?
         </h2>

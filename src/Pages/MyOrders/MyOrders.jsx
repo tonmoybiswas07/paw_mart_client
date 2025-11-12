@@ -3,13 +3,13 @@ import { AuthContext } from "../../Components/AuthContext/AuthContext";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
-  const [orders, setOrders] = useState([]);
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
     if (!user?.email) return;
     fetch(`http://localhost:5000/orders?email=${user.email}`)
       .then((res) => res.json())
-      .then((data) => setOrders(data.result || []));
+      .then((data) => setOrder(data.result || []));
   }, [user]);
 
   return (
@@ -18,7 +18,7 @@ const MyOrders = () => {
         My Orders
       </h1>
 
-      {orders.length === 0 ? (
+      {order.length === 0 ? (
         <p className="text-center text-gray-500">No orders found.</p>
       ) : (
         <div className="overflow-x-auto">
@@ -35,7 +35,7 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {order.map((order) => (
                 <tr key={order._id} className="hover:bg-amber-50">
                   <td>{order.productName}</td>
                   <td>{order.buyerName}</td>
@@ -50,6 +50,12 @@ const MyOrders = () => {
           </table>
         </div>
       )}
+      <div className="flex justify-end mt-6">
+        
+        <button className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
+          Download Report
+        </button>
+      </div>
     </div>
   );
 };
