@@ -11,6 +11,8 @@ import MyOrders from "../Pages/MyOrders/MyOrders";
 import CardDetails from "../Pages/CardDetails/CardDetails";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 
+import CategoryFilter from "../Layouts/CategoryCards/CategoryFilter";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -68,6 +70,10 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/martProducts/${params.id}`),
+      },
+      {
+        path: "/category-filtered-product/:categoryName",
+        element: <CategoryFilter></CategoryFilter>,
       },
     ],
     errorElement: <Error></Error>,
