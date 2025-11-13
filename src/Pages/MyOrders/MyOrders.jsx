@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Components/AuthContext/AuthContext";
+import { jsPDF } from "jspdf";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -11,6 +12,40 @@ const MyOrders = () => {
       .then((res) => res.json())
       .then((data) => setOrder(data.result || []));
   }, [user]);
+
+  const handleDownloadReport = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("My Orders Report", 14, 15);
+    doc.setFontSize(10);
+    doc.text(`User: ${user?.email || "Unknown User"}`, 14, 22);
+
+    const startY = 30;
+    let y = startY;
+    doc.setFontSize(11);
+    doc.text("Product", 14, y);
+    doc.text("Price", 60, y);
+    doc.text("Qty", 90, y);
+    doc.text("Address", 110, y);
+    doc.text("Date", 160, y);
+    y += 6;
+
+    order.forEach((o) => {
+      doc.text(o.productName || "-", 14, y);
+      doc.text(`$${o.price}`, 60, y);
+      doc.text(String(o.quantity), 90, y);
+      doc.text(o.address || "-", 110, y);
+      doc.text(o.date || "-", 160, y);
+      y += 6;
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+    });
+
+    doc.save("My_Orders.pdf");
+  };
 
   return (
     <div className="p-17">
@@ -50,9 +85,12 @@ const MyOrders = () => {
           </table>
         </div>
       )}
+
       <div className="flex justify-end mt-6">
-        
-        <button className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
+        <button
+          onClick={handleDownloadReport}
+          className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+        >
           Download Report
         </button>
       </div>

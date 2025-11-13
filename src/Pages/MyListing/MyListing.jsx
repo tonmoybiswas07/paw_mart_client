@@ -119,7 +119,7 @@ const MyListing = () => {
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full border border-gray-200 shadow-md rounded-xl">
-            <thead className="bg-amber-100 text-amber-800">
+            <thead className="bg-amber-100  text-amber-800">
               <tr>
                 <th>Image</th>
                 <th>Name</th>
@@ -131,7 +131,10 @@ const MyListing = () => {
             </thead>
             <tbody>
               {listings.map((item) => (
-                <tr key={item._id} className="hover:bg-amber-50">
+                <tr
+                  key={item._id}
+                  className=" hover:bg-amber-50 hover:text-black"
+                >
                   <td>
                     <img
                       src={item.image}
