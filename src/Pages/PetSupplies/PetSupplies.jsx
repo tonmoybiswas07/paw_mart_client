@@ -4,7 +4,7 @@ import PetSuppliesCard from "../petSuppliesCard/PetSuppliesCard";
 import { Hourglass } from "react-loader-spinner";
 
 const PetSupplies = () => {
-  const loader = useLoaderData(); // loader from route
+  const loader = useLoaderData(); 
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("");
@@ -15,7 +15,7 @@ const PetSupplies = () => {
       setData(loader.result);
       setFilteredData(loader.result);
     }
-    setLoading(false); // loading false even if loader is empty
+    setLoading(false); 
   }, [loader]);
 
   const handleSearch = (e) => {

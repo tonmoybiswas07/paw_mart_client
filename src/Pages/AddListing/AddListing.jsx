@@ -17,7 +17,7 @@ const AddListing = () => {
       image: e.target.image.value,
     };
 
-    fetch("http://localhost:5000/martProducts", {
+    fetch("https://paw-mart-server-two.vercel.app/martProducts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

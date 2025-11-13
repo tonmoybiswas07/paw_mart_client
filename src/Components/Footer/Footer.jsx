@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="bg-amber-100 text-gray-700 py-10 px-6 mt-16">
       <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-3">
-        {/* Logo + Description */}
+       
         <div>
           <div className="flex items-center gap-2 mb-3">
             <PawPrint className="text-amber-700 w-6 h-6" />
@@ -17,7 +17,7 @@ function Footer() {
           </p>
         </div>
 
-        {/* Useful Links */}
+      
         <div>
           <h3 className="text-lg font-semibold text-amber-800 mb-3">
             Useful Links
@@ -50,7 +50,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Copyright */}
+      
         <div className="flex flex-col justify-center items-start md:items-end">
           <p className="text-sm text-gray-600">
             © {new Date().getFullYear()} PawMart. All rights reserved.

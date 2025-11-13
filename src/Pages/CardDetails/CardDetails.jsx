@@ -41,7 +41,7 @@ const CardDetails = () => {
       status: "Pending",
     };
 
-    fetch("http://localhost:5000/orders", {
+    fetch("https://paw-mart-server-two.vercel.app/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(order),
@@ -108,7 +108,7 @@ const CardDetails = () => {
         </div>
       </div>
 
-      {/* ✅ Order Modal */}
+      
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative">

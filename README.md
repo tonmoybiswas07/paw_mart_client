@@ -1,16 +1,32 @@
-# React + Vite
+#  PawMart — Adopt & Shop for Your Pets
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site URL:** [https://pawmart.web.app](https://pawmart.web.app)
 
-Currently, two official plugins are available:
+Welcome to **PawMart**, your trusted platform to **adopt adorable pets** and **shop everything your pets love** — from food to accessories! 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌟 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-  **Pet Adoption Section:** Discover pets available for adoption with details like breed, age, and location.
+- **Pet Food & Supplies:** Explore a wide range of pet foods, care items, and grooming essentials.
+-  **Accessories Store:** Collars, toys, and pet essentials — all in one place.
+- **Dynamic Category Filtering:** View category-wise products fetched dynamically from MongoDB.
+- **User Authentication:** Secure login & registration using Firebase Authentication.
+- **Shopping Cart & Orders:** Add products to the cart, view order details, and download reports (PDF).
+- **Responsive UI:** Clean and responsive interface built with Tailwind CSS & React 19.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚙️ Tech Stack
+
+**Client:** React 19, React Router, Tailwind CSS, Lucide React  
+**Server:** Node.js, Express.js, MongoDB Atlas  
+**Authentication:** Firebase Authentication  
+**PDF/Report Generation:** jsPDF  
+
+---
+
+
+
+

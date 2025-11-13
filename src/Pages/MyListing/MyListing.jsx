@@ -12,7 +12,7 @@ const MyListing = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/martProducts?ownerEmail=${user.email}`)
+    fetch(`https://paw-mart-server-two.vercel.app/martProducts?ownerEmail=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data.result || []);
@@ -36,7 +36,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/martProducts/${id}`, {
+        fetch(`https://paw-mart-server-two.vercel.app/martProducts/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -60,13 +60,13 @@ const MyListing = () => {
     });
   };
 
-  // ✅ Update button click
+ 
   const openUpdateModal = (item) => {
     setSelectedItem(item);
     document.getElementById("update_modal").showModal();
   };
 
-  // ✅ Update submission
+  
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -76,7 +76,7 @@ const MyListing = () => {
       location: form.location.value,
     };
 
-    fetch(`http://localhost:5000/martProducts/${selectedItem._id}`, {
+    fetch(`https://paw-mart-server-two.vercel.app/martProducts/${selectedItem._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),
@@ -107,7 +107,7 @@ const MyListing = () => {
   }
 
   return (
-    <div className="p-10">
+    <div className="p-17">
       <h1 className="text-3xl font-bold text-center text-amber-700 mb-10">
         My Listings
       </h1>
@@ -167,7 +167,6 @@ const MyListing = () => {
         </div>
       )}
 
-      {/* ✅ DaisyUI Modal */}
       <dialog id="update_modal" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg text-amber-700 mb-4">

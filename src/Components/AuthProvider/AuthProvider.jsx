@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
     try {
       const methods = await fetchSignInMethodsForEmail(auth, email);
 
-      // If account exists with Google only
+
       if (methods.includes("google.com") && !methods.includes("password")) {
         throw new Error(
           "This email is registered via Google. Please use Google login."
