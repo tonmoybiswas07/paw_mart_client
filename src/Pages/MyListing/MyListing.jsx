@@ -12,7 +12,7 @@ const MyListing = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/martProducts?ownerEmail=${user.email}`)
+    fetch(`https://paw-mart-server-two.vercel.app/martProducts?ownerEmail=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data.result || []);
@@ -36,7 +36,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/${id}`, {
+        fetch(`https://paw-mart-server-two.vercel.app/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -76,7 +76,7 @@ const MyListing = () => {
       location: form.location.value,
     };
 
-    fetch(`http://localhost:5000/${selectedItem._id}`, {
+    fetch(`https://paw-mart-server-two.vercel.app/${selectedItem._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),

@@ -41,7 +41,7 @@ const CardDetails = () => {
       status: "Pending",
     };
 
-    fetch("http://localhost:5000/orders", {
+    fetch("https://paw-mart-server-two.vercel.app/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(order),
