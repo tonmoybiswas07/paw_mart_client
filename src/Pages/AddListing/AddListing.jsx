@@ -17,7 +17,7 @@ const AddListing = () => {
       image: e.target.image.value,
     };
 
-    fetch("https://paw-mart-server-two.vercel.app/martProducts", {
+    fetch("http://localhost:5000/martProducts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const AddListing = () => {
       });
   };
   return (
-    <div className="flex items-center justify-center min-h-screen  mt-15">
+    <div className="flex items-center justify-center pt-18 pb-16 min-h-screen bg-gradient-to-r from-orange-200 via-amber-200 to-yellow-200">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Add New Listing

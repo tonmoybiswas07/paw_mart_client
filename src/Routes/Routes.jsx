@@ -23,13 +23,13 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         loader: () =>
-          fetch("https://paw-mart-server-two.vercel.app/martProducts"),
+          fetch("http://localhost:5000/martProducts"),
       },
       {
         path: "/petSupplies",
         element: <PetSupplies></PetSupplies>,
         loader: () =>
-          fetch("https://paw-mart-server-two.vercel.app/martProducts"),
+          fetch("http://localhost:5000/martProducts"),
       },
       {
         path: "/addListing",
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://paw-mart-server-two.vercel.app/martProducts/${params.id}`
+            `http://localhost:5000/martProducts/${params.id}`
           ),
       },
       {

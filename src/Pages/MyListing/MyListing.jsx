@@ -12,7 +12,7 @@ const MyListing = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`https://paw-mart-server-two.vercel.app/martProducts?ownerEmail=${user.email}`)
+    fetch(`http://localhost:5000/martProducts?ownerEmail=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setListings(data.result || []);
@@ -36,7 +36,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://paw-mart-server-two.vercel.app/martProducts/${id}`, {
+        fetch(`http://localhost:5000/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -76,7 +76,7 @@ const MyListing = () => {
       location: form.location.value,
     };
 
-    fetch(`https://paw-mart-server-two.vercel.app/martProducts/${selectedItem._id}`, {
+    fetch(`http://localhost:5000/${selectedItem._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),
@@ -107,7 +107,7 @@ const MyListing = () => {
   }
 
   return (
-    <div className="p-17">
+    <div className="p-17 min-h-screen">
       <h1 className="text-3xl font-bold text-center text-amber-700 mb-10">
         My Listings
       </h1>

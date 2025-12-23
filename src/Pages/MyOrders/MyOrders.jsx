@@ -8,7 +8,7 @@ const MyOrders = () => {
 
   useEffect(() => {
     if (!user?.email) return;
-    fetch(`https://paw-mart-server-two.vercel.app/orders?email=${user.email}`)
+    fetch(`http://localhost:5000/orders?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setOrder(data.result || []));
   }, [user]);
@@ -48,7 +48,7 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="p-17">
+    <div className="p-17 min-h-screen">
       <h1 className="text-3xl font-bold text-center text-amber-700 mb-10">
         My Orders
       </h1>
@@ -71,7 +71,7 @@ const MyOrders = () => {
             </thead>
             <tbody>
               {order.map((order) => (
-                <tr key={order._id} className="hover:bg-amber-50">
+                <tr key={order._id} className="hover:bg-amber-50 text-black">
                   <td>{order.productName}</td>
                   <td>{order.buyerName}</td>
                   <td>${order.price}</td>

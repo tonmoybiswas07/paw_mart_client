@@ -41,7 +41,7 @@ const CardDetails = () => {
       status: "Pending",
     };
 
-    fetch("https://paw-mart-server-two.vercel.app/orders", {
+    fetch("http://localhost:5000/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(order),
@@ -65,8 +65,8 @@ const CardDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 flex items-center justify-center p-6">
-      <div className="bg-white shadow-2xl rounded-2xl max-w-3xl w-full flex flex-col md:flex-row overflow-hidden">
+    <div className="min-h-200 bg-amber-50 flex items-center justify-center p-6">
+      <div className="bg-amber-100 shadow-2xl rounded-2xl max-w-3xl w-full flex flex-col md:flex-row overflow-hidden">
         <div className="md:w-1/2">
           <img src={image} alt={name} className="w-full h-full object-cover" />
         </div>
@@ -111,14 +111,14 @@ const CardDetails = () => {
       
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative">
+          <div className="bg-amber-50 rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               Place Your Order
             </h2>
 
             <form
               onSubmit={handleOrderSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black "
             >
               <input
                 type="text"
@@ -148,27 +148,27 @@ const CardDetails = () => {
                 type="text"
                 name="address"
                 placeholder="Full Address"
-                className="w-full p-2 border border-gray-300 rounded-lg md:col-span-2"
+                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-lg md:col-span-2"
                 required
               />
               <input
                 type="date"
                 name="date"
-                className="w-full p-2 border border-gray-300 rounded-lg"
+                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-lg"
                 required
               />
               <input
                 type="tel"
                 name="phone"
                 placeholder="Phone"
-                className="w-full p-2 border border-gray-300 rounded-lg"
+                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-lg"
                 required
               />
               <textarea
                 name="notes"
                 rows={3}
                 placeholder="Additional Notes"
-                className="w-full p-2 border border-gray-300 rounded-lg md:col-span-2"
+                className="w-full p-2 border border-gray-300 bg-gray-100 rounded-lg md:col-span-2"
               />
 
               <div className="flex justify-end gap-2 md:col-span-2">

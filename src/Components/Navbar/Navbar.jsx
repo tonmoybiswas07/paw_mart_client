@@ -26,15 +26,9 @@ const Navbar = () => {
         setLoading(false);
       });
   };
-  useEffect(() => {
-    const html = document.querySelector("html");
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
 
-  const handleTheme = (checked) => {
-    setTheme(checked ? "dark" : "light");
-  };
+
+ 
   const links = (
     <>
       <NavLink to={"/"}>Home</NavLink>
@@ -51,115 +45,94 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar py-2 bg-base-100 fixed top-0 left-0 right-0 shadow z-50">
-        <div className="  w-120 navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              {links}
-            </ul>
-          </div>
-          <Link to={"/"} className=" text-xl font-bold text-amber-600">
-            PawMart
-          </Link>
-        </div>
-        <div className="navbar-center hidden lg:flex justify-center items-center">
-          <ul className="menu menu-horizontal px-1 gap-5 text-black">
-            {links}
-          </ul>
-        </div>
-        <div></div>
-
-        {loading ? (
-          <div className="ml-120">
-            <CircularProgress
-              height="60"
-              width="60"
-              color="#4fa94d"
-              ariaLabel="circular-progress-loading"
-              wrapperStyle={{}}
-              wrapperClass="wrapper-class"
-              visible={true}
-              strokeWidth={2}
-              animationDuration={1}
-            />
-          </div>
-        ) : user ? (
-          <div className="dropdown dropdown-end ml-30">
-            <div tabIndex={0} role="button" className="ml-30 m-1">
-              <img
-                src={user?.photoURL || "https://via.placeholder.com/88"}
-                className="h-10  w-10 rounded-full mx-auto border-2 border-amber-800"
-                alt=""
-              />
-            </div>
-            <div
-              tabIndex="-1"
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-60 p-2 shadow-sm"
-            >
-              <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-              <p className="">{user?.email}</p>
-              <input
-                onChange={(e) => handleTheme(e.target.checked)}
-                type="checkbox"
-                defaultChecked={localStorage.getItem("theme") === "dark"}
-                className="toggle"
-              />
-
-              <button
-                onClick={handleSignout}
-                className="bg-amber-800 px-8 font-bold text-white rounded-full mt-2 py-3"
-              >
-                Sign Out
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="navbar-end gap-3">
-            <input
-              onChange={(e) => handleTheme(e.target.checked)}
-              type="checkbox"
-              defaultChecked={localStorage.getItem("theme") === "dark"}
-              className="toggle"
-            />
-            <Link to="/login">
-              <StyledWrapper>
-                <button className="animated-button ">
-                  <span>Login</span>
-                  <span />
-                </button>
-              </StyledWrapper>
-            </Link>
-            <Link to="/register">
-              <StyledWrapper>
-                <button className="animated-button">
-                  <span>Register</span>
-                  <span />
-                </button>
-              </StyledWrapper>
-            </Link>
-          </div>
-        )}
+     <div className="navbar py-2 bg-gradient-to-r from-orange-200 via-amber-200 to-yellow-200
+ fixed top-0 left-0 right-0 shadow z-50 flex justify-between items-center px-4">
+  {/* Left: Logo + Mobile menu */}
+  <div className="flex items-center gap-4">
+    <div className="dropdown">
+      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
       </div>
+      <ul
+        tabIndex="-1"
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 p-2 shadow"
+      >
+        {links}
+      </ul>
+    </div>
+    <Link to={"/"} className="text-xl font-bold text-amber-600">
+      PawMart
+    </Link>
+  </div>
+
+  {/* Center: Desktop Links */}
+  <div className="hidden lg:flex justify-center items-center">
+    <ul className="menu menu-horizontal px-1 gap-5 text-black">
+      {links}
+    </ul>
+  </div>
+
+  {/* Right: User/Login Buttons */}
+  <div className="flex items-center gap-3">
+    {loading ? (
+      <CircularProgress
+        height="40"
+        width="40"
+        color="#4fa94d"
+        ariaLabel="circular-progress-loading"
+        strokeWidth={2}
+      />
+    ) : user ? (
+      <div className="dropdown dropdown-end">
+        <div tabIndex={0} role="button" className="cursor-pointer">
+          <img
+            src={user?.photoURL || "https://via.placeholder.com/88"}
+            className="h-10 w-10 rounded-full border-2 border-amber-800"
+            alt="user"
+          />
+        </div>
+        <div className="dropdown-content menu bg-base-100 rounded-box w-60 p-2 shadow-sm">
+          <h2 className="text-xl font-semibold">{user?.displayName}</h2>
+          <p>{user?.email}</p>
+          <button
+            onClick={handleSignout}
+            className="bg-amber-800 px-8 font-bold text-white rounded-full mt-2 py-3"
+          >
+            Sign Out
+          </button>
+        </div>
+      </div>
+    ) : (
+      <>
+        <Link to="/login">
+          <StyledWrapper>
+            <button className="animated-button ">
+              <span>Login</span>
+              <span />
+            </button>
+          </StyledWrapper>
+        </Link>
+        <Link to="/register">
+          <StyledWrapper>
+            <button className="animated-button">
+              <span>Register</span>
+              <span />
+            </button>
+          </StyledWrapper>
+        </Link>
+      </>
+    )}
+  </div>
+</div>
+
     </div>
   );
 };

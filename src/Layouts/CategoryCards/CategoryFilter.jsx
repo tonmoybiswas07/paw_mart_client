@@ -6,7 +6,7 @@ const CategoryFilter = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`https://paw-mart-server-two.vercel.app/products/category/${categoryName}`)
+    fetch(`http://localhost:5000/products/category/${categoryName}`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error("Error fetching products:", err));

@@ -29,7 +29,7 @@ const PetSupplies = () => {
   };
 
   return (
-    <div>
+    <div className="pb-16">
       <div className="py-20">
         <h1 className="font-bold text-3xl text-center text-amber-700">
           Pets & Supplies — Adopt, Care & Shop
