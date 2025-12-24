@@ -115,7 +115,7 @@ const Navbar = () => {
         <Link to="/login">
           <StyledWrapper>
             <button className="animated-button ">
-              <span>Login</span>
+              <span className="text-black">Login</span>
               <span />
             </button>
           </StyledWrapper>
@@ -123,7 +123,7 @@ const Navbar = () => {
         <Link to="/register">
           <StyledWrapper>
             <button className="animated-button">
-              <span>Register</span>
+              <span className="text-black">Register</span>
               <span />
             </button>
           </StyledWrapper>
@@ -162,6 +162,8 @@ const StyledWrapper = styled.div`
     width: 20px;
     height: 20px;
     background-color: #2196f3;
+    color:#121212;
+    
     border-radius: 50%;
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
