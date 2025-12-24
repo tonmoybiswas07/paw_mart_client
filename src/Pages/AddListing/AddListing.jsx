@@ -42,14 +42,14 @@ const AddListing = () => {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-black mb-1">
               Name
             </label>
             <input
               type="text"
               name="name"
               placeholder="Enter name"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black outline-none focus:border-amber-500"
             />
           </div>
 
@@ -59,7 +59,7 @@ const AddListing = () => {
             </label>
             <select
               name="category"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black outline-none focus:border-amber-500"
             >
               <option>Pets</option>
               <option>Food</option>
@@ -76,7 +76,7 @@ const AddListing = () => {
               type="number"
               name="price"
               placeholder="Enter price"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black outline-none focus:border-amber-500"
             />
           </div>
 
@@ -88,7 +88,7 @@ const AddListing = () => {
               type="text"
               name="location"
               placeholder="Enter location"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black outline-none focus:border-amber-500"
             />
           </div>
 
@@ -99,7 +99,7 @@ const AddListing = () => {
             <textarea
               name="description"
               placeholder="Enter description"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black outline-none focus:border-amber-500"
               rows="4"
             />
           </div>
@@ -112,7 +112,7 @@ const AddListing = () => {
               type="url"
               name="image"
               placeholder="Enter image URL"
-              className="w-full border border-gray-300 rounded-lg p-2 outline-none focus:border-amber-500"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black outline-none focus:border-amber-500"
             />
           </div>
 
@@ -125,7 +125,7 @@ const AddListing = () => {
               name="email"
               value={user.email}
               readOnly
-              className="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 text-gray-600 outline-none"
+              className="w-full border border-gray-300 rounded-lg p-2 text-black bg-gray-100  outline-none"
             />
           </div>
 

@@ -36,7 +36,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://paw-mart-server-two.vercel.app/${id}`, {
+        fetch(`https://paw-mart-server-two.vercel.app/martProducts/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -76,7 +76,7 @@ const MyListing = () => {
       location: form.location.value,
     };
 
-    fetch(`https://paw-mart-server-two.vercel.app/${selectedItem._id}`, {
+    fetch(`https://paw-mart-server-two.vercel.app/martProducts/${selectedItem._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),

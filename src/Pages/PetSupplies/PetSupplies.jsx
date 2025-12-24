@@ -42,7 +42,7 @@ const PetSupplies = () => {
           placeholder="Search by name..."
           value={search}
           onChange={handleSearch}
-          className="border border-amber-500 rounded-xl px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="border border-amber-500 text-black rounded-xl px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-amber-400"
         />
       </div>
 
